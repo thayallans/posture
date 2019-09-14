@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "PiedPosture",
+    "version": "0.1",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "jquery-3.4.1.min.js",
+                "posenet.js",
+                "content.js",
+                "p5.min.js",
+                "p5.dom.min.js",
+                "ml5.min.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "piedPiperGreen.png"
+    },
+    "permissions" : [
+        "storage",
+        "activeTab"
+    ]
+}
