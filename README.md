@@ -1,4 +1,4 @@
-# piedPosture
+# Posture
 
 ### Getting started
 To start Git clone or download the repo.
