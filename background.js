@@ -13,14 +13,14 @@ const updateIcon = () => {
     chrome.storage.sync.get('number', function (data) {
         var current = data.number;
         if (current == 1) {
-            chrome.browserAction.setIcon({ path: 'piedPiperGreen.png' });
+            chrome.browserAction.setIcon({ path: 'img/piedPiperGreen.png' });
             current = 0;
             console.log(document.body);
 
             console.log("off");
         }
         else {
-            chrome.browserAction.setIcon({ path: 'PiedPiperRed.png' });
+            chrome.browserAction.setIcon({ path: 'img/PiedPiperRed.png' });
             current = 1;
             console.log("on");
         }
