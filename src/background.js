@@ -1,14 +1,17 @@
-// background.js
+/* 
+=================
+= background.js =
+=================
+*/
 
-
-
+// Adds a chrome listener when extension is installed to set application to off.
 chrome.runtime.onInstalled.addListener(function () {
     chrome.storage.sync.set({ number: 0 }, function () {
         console.log('off');
     });
 });
 
-// Called when the user clicks on the browser action.
+// Anonymous function called when the user clicks on the browserAction to set the icon for the extension.
 const updateIcon = () => {
     chrome.storage.sync.get('number', function (data) {
         var current = data.number;
@@ -30,6 +33,8 @@ const updateIcon = () => {
     });
 }
 
+
+// Anonymous function called when the user clicks on the browserAction to send information to content.js to act on current tab.
 const sent = (tab) => {
     // Send a message to the active tab
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -49,16 +54,12 @@ const sent = (tab) => {
     });
 }
 
+// Anonymous function called when the user clicks on the browserAction to call 2 subfunctions that change the icon and send info to current tab
 const chainActions = (tab) => {
     sent(tab)
     updateIcon()
 }
 
-//chrome.browserAction.onClicked.addListener(updateIcon);
+
+// Add a chrome listener when the browserAction is clicked to run the function chainActions.
 chrome.browserAction.onClicked.addListener(chainActions);
-
-//updateIcon();
-
-/*
-chrome.browserAction.onClicked.addListener();
-*/

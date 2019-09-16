@@ -1,3 +1,9 @@
+/* 
+=================
+= posenet.js =
+=================
+*/
+
 let video;
 let poseNet;
 let poses = [];
@@ -16,7 +22,7 @@ function setup() {
     // Create a new poseNet method with a single detection
     poseNet = ml5.poseNet(video, modelReady);
     // This sets up an event that fills the global variable "poses"
-    // with an array every time new poses are detected
+    // With an array every time new poses are detected
     poseNet.on('pose', function (results) {
         poses = results;
 
@@ -29,16 +35,12 @@ function setup() {
 
 // This function turns on AI
 function start() {
-    //select('#startbutton').html('stop')
-    //document.getElementById('startbutton').addEventListener('click', stop);
     started = true;
     loop();
 }
 
 // This function stops the experiment
 function stop() {
-    //select('#startbutton').html('start')
-    //document.getElementById('startbutton').addEventListener('click', start);
     removeBlur();
     started = false;
     noLoop();
@@ -46,7 +48,7 @@ function stop() {
 
 function draw() {
     if (started) {
-        //We use white picture as background. You can comment this line and see what will happen. It's cool glitch effect.
+        // We use white picture as background. You can comment this line and see what will happen. It's cool glitch effect.
         // image(whitePicture, 0, 0, width, height);
         image(video, 0, 0, 640, 480);
 
@@ -82,7 +84,7 @@ function drawEyes() {
             leftAnkle = pose.keypoints[15].position;
 
 
-            //Position of eyes when a human opens experiment page. Start position.
+            // Position of eyes when a human opens experiment page. Start position.
             while (defaultRightEyePosition.length < 1) {
                 defaultRightEyePosition.push(rightEye.y);
             }
@@ -91,7 +93,7 @@ function drawEyes() {
                 defaultLeftEyePosition.push(leftEye.y);
             }
 
-            //Math.abs converts a negative number to a positive one
+            // Math.abs converts a negative number to a positive one
             if (Math.abs(rightEye.y - defaultRightEyePosition[0]) > 15) {
                 blurScreen();
             }
@@ -113,11 +115,13 @@ function drawEyes() {
     }
 }
 
+// Adds blur to entire screen
 function blurScreen() {
     document.body.style.filter = 'blur(10px)';
     document.body.style.transition = '0.9s';
 }
 
+// Removes blur from entire screen
 function removeBlur() {
     document.body.style.filter = 'blur(0px)';
 }
