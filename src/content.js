@@ -6,6 +6,17 @@
 
 // When the page is ready adds a videoContainer which displays the videoStream + eye tracking
 $(document).ready(function() {
+
+    chrome.storage.local.get('number', function(data){
+        var current = data.number
+        if (current == 1){
+            stop()
+        }
+        else {
+            start()
+        }
+    });
+
     var $div = $('<div />').appendTo('body');
     $div.attr('id', 'videoContainer');
     console.log(document.body);

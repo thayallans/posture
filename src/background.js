@@ -6,7 +6,7 @@
 
 // Adds a chrome listener when extension is installed to set application to off.
 chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.sync.set({ number: 0 }, function () {
+    chrome.storage.local.set({ number: 0 }, function () {
         console.log('off');
     });
 });
@@ -39,13 +39,15 @@ const sent = (tab) => {
     // Send a message to the active tab
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];
-        chrome.storage.sync.get('number', function (data) {
+        chrome.storage.local.get('number', function (data) {
             var current = data.number;
             if (current == 1) {
+                console.log(activeTab.id);
                 chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action_1" });
                 console.log("off");
             }
             else {
+                console.log(activeTab.id);
                 chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action_2" });
                 console.log("on");
             }
