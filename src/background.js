@@ -63,3 +63,14 @@ const chainActions = (tab) => {
 
 // Add a chrome listener when the browserAction is clicked to run the function chainActions.
 chrome.browserAction.onClicked.addListener(chainActions);
+
+// Standard Google Universal Analytics code
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); // Note: https protocol here
+    
+    ga('create', 'UA-148183683-1', 'auto'); // Our GA identifier
+    ga('set', 'checkProtocolTask', function(){}); // Removes failing protocol check. @see: http://stackoverflow.com/a/22152353/1958200
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview', 'content.js'); // Specify the virtual path

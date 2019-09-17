@@ -9,6 +9,9 @@
     },
     "content_scripts": [
         {
+            "content_security_policy": [
+                "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+            ],
             "matches": [
                 "<all_urls>"
             ],
@@ -19,6 +22,7 @@
                 "lib/p5.min.js",
                 "lib/p5.dom.min.js",
                 "lib/ml5.min.js"
+                
             ]
         }
     ],
