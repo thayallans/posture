@@ -30,27 +30,27 @@ function setup() {
 
 
     video.hide();
-    noLoop();
+    video.noLoop();
 }
 
 // This function turns on AI
 function start() {
     started = true;
-    loop();
+    video.loop();
 }
 
 // This function stops the experiment
 function stop() {
     removeBlur();
     started = false;
-    noLoop();
+    video.noLoop();
 }
 
 function draw() {
     if (started) {
         // We use white picture as background. You can comment this line and see what will happen. It's cool glitch effect.
-        // image(whitePicture, 0, 0, width, height);
-        image(video, 0, 0, 640, 480);
+        //image(whitePicture, 0, 0, width, height);
+        //image(video, 0, 0, 640, 480);
 
         drawEyes();
     }

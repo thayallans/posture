@@ -5,33 +5,35 @@
 */
 
 // When the page is ready adds a videoContainer which displays the videoStream + eye tracking
-$(document).ready(function() {
+$(window).ready(function() {
+    chrome.storage.sync.get('number', function(data) {
+        var $div = $('<div />').appendTo('body');
+        $div.attr('id', 'videoContainer');
+        console.log(document.body);
 
-    chrome.storage.local.get('number', function(data){
         var current = data.number
-        if (current == 1){
-            stop()
-        }
-        else {
-            start()
+        console.log(current)
+        //current == 1 --> camera is on
+        if (current == 1) {
+            
+            console.log("start");
+            start();
         }
     });
 
-    var $div = $('<div />').appendTo('body');
-    $div.attr('id', 'videoContainer');
-    console.log(document.body);
+    
 });
 
 // Adds a chrome listener to start or stop the extension based off of when the click was registed in background.js and passed to here.
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.message === "clicked_browser_action_1") {
-            console.log("sticky");
-            stop()
+            console.log("Turning off");
+            stop();
         }
         else {
-            console.log("grind");
-            start()            
+            console.log("Turning on");
+            start();            
         }
     }
 );
