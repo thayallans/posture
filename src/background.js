@@ -5,8 +5,8 @@
 */
 
 // Adds a chrome listener when extension is installed to set application to off.
-chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.sync.set({ number: 0 }, function () {
+chrome.runtime.onStartup.addListener(function () {
+    chrome.storage.sync.set({ number:  0}, function () {
         console.log('off');
     });
 });
@@ -14,22 +14,19 @@ chrome.runtime.onInstalled.addListener(function () {
 // Anonymous function called when the user clicks on the browserAction to set the icon for the extension.
 const updateIcon = () => {
     chrome.storage.sync.get('number', function (data) {
-        var current = data.number;
+        var current = data.number; // If current == 1 camera is on but will turn off
+        console.log(current);
         if (current == 1) {
-            chrome.browserAction.setIcon({ path: 'img/piedPiperGreen.png' });
-            current = 0;
-            console.log(document.body);
-
+            console.log(current);
+            chrome.browserAction.setIcon({ path: 'img/red.png' });
             console.log("off");
         }
         else {
-            chrome.browserAction.setIcon({ path: 'img/PiedPiperRed.png' });
-            current = 1;
+            console.log(current);
+            chrome.browserAction.setIcon({ path: 'img/green.png' });
             console.log("on");
         }
-        chrome.storage.sync.set({ number: current }, function () {
-            console.log('The number is set to ' + current);
-        });
+        
     });
 }
 
@@ -43,21 +40,26 @@ const sent = (tab) => {
             var current = data.number;
             if (current == 1) {
                 chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action_1" });
-                console.log("off");
+                current = 0;
+                console.log(current);
             }
             else {
                 chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action_2" });
                 console.log("on");
+                current = 1;
             }
+            chrome.storage.sync.set({ number: current}, function () {
+                console.log('The number is set to ' + current);
+            });
         });
-        
     });
+    
 }
 
 // Anonymous function called when the user clicks on the browserAction to call 2 subfunctions that change the icon and send info to current tab
 const chainActions = (tab) => {
-    sent(tab)
     updateIcon()
+    sent(tab)
 }
 
 

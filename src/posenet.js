@@ -10,7 +10,7 @@ let poses = [];
 var started = false;
 
 function setup() {
-    const canvas = createCanvas(640, 480); // or use to make fullscreen canvas window.innerWidth, window.innerHeight, but you should to change the formula in changeFontSize()
+    const canvas = createCanvas(1, 1); // or use to make fullscreen canvas window.innerWidth, window.innerHeight, but you should to change the formula in changeFontSize()
     canvas.parent('videoContainer');
     console.log(width);
     // Video capture 
@@ -30,27 +30,27 @@ function setup() {
 
 
     video.hide();
-    noLoop();
+    video.noLoop();
 }
 
 // This function turns on AI
 function start() {
     started = true;
-    loop();
+    video.loop();
 }
 
 // This function stops the experiment
 function stop() {
     removeBlur();
     started = false;
-    noLoop();
+    video.noLoop();
 }
 
 function draw() {
     if (started) {
         // We use white picture as background. You can comment this line and see what will happen. It's cool glitch effect.
-        // image(whitePicture, 0, 0, width, height);
-        image(video, 0, 0, 640, 480);
+        //image(whitePicture, 0, 0, width, height);
+        //image(video, 0, 0, 640, 480);
 
         drawEyes();
     }
@@ -104,13 +104,13 @@ function drawEyes() {
 
 
             // Only draw an eye is the pose probability is bigger than 0.2
-            if (keypoint.score > 0.9) {
-                fill(255, 0, 0);
-                noStroke();
-                ellipse(rightEye.x, rightEye.y, 10, 10);
-                ellipse(leftEye.x, leftEye.y, 10, 10);
-                console.log(Math.abs(rightEye.y - defaultRightEyePosition[0]));
-            }
+            //if (keypoint.score > 0.9) {
+            //    fill(255, 0, 0);
+            //    noStroke();
+            //    ellipse(rightEye.x, rightEye.y, 10, 10);
+            //    ellipse(leftEye.x, leftEye.y, 10, 10);
+            //    console.log(Math.abs(rightEye.y - defaultRightEyePosition[0]));
+            //}
         }
     }
 }
